@@ -47,7 +47,7 @@ const getSales = async (dataInicial, dataFinal) => {
     sum(total) as venda,
     sum(total)/sum(cupom) as ticket,
     case sum(total) when 0 then 0 else cast((sum(total) - sum(cmv)) / sum(total) as decimal(15,4)) end as margem
-  FROM vendascupom WHERE datamovimento BETWEEN ${dataInicial} AND ${dataFinal}
+  FROM vendascupom WHERE datamovimento BETWEEN '${dataInicial}' AND '${dataFinal}'
   group by idempresa
   order by idempresa`);
 };
@@ -56,7 +56,7 @@ const getBuy = async (dataInicial, dataFinal) => {
   await query(`SELECT 
     idempresa,
     sum(total) as compras
-  FROM compras WHERE datamovimento BETWEEN ${dataInicial} AND ${dataFinal}
+  FROM compras WHERE datamovimento BETWEEN '${dataInicial}' AND '${dataFinal}'
   group by idempresa
   order by idempresa`);
 };
@@ -65,7 +65,7 @@ const getReturnSales = async (dataInicial, dataFinal) => {
   return await query(`SELECT 
     idempresa,
     sum(total) as devolucaoVendas
-  FROM devolucaovenda WHERE datamovimento BETWEEN ${dataInicial} AND ${dataFinal}
+  FROM devolucaovenda WHERE datamovimento BETWEEN '${dataInicial}' AND '${dataFinal}'
   group by idempresa
   order by idempresa`);
 };
@@ -74,7 +74,7 @@ const getReturnBuy = async (dataInicial, dataFinal) => {
   return await query(`SELECT 
     idempresa,
     sum(total) as devolucaoCompra
-  FROM devolucaocompra WHERE datamovimento BETWEEN ${dataInicial} AND ${dataFinal}
+  FROM devolucaocompra WHERE datamovimento BETWEEN '${dataInicial}' AND '${dataFinal}'
   group by idempresa
   order by idempresa`);
 };
@@ -83,7 +83,7 @@ const getLost = async (dataInicial, dataFinal) => {
   return await query(`SELECT 
     idempresa,
     sum(total) as perda
-  FROM perdas WHERE datamovimento BETWEEN ${dataInicial} AND ${dataFinal}
+  FROM perdas WHERE datamovimento BETWEEN '${dataInicial}' AND '${dataFinal}'
   group by idempresa
   order by idempresa`);
 };
