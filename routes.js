@@ -53,7 +53,7 @@ const getSales = async (dataInicial, dataFinal) => {
 };
 
 const getBuy = async (dataInicial, dataFinal) => {
-  await query(`SELECT 
+ return await query(`SELECT 
     idempresa,
     sum(total) as compras
   FROM compras WHERE datamovimento BETWEEN '${dataInicial}' AND '${dataFinal}'
